@@ -238,23 +238,48 @@ section{position:relative;padding:9rem 1.5rem}
 .marquee i{font-style:normal;color:var(--amber-deep);font-size:.8rem;align-self:center}
 @keyframes marquee{to{transform:translateX(-50%)}}
 
-/* ============ TIMELINE ============ */
+/* ============ EXPERIENCE — scroll-drawn journey w/ hang-tag cards ============ */
 #work{background:linear-gradient(to bottom,transparent,rgba(21,16,9,.5) 20%,rgba(21,16,9,.5) 80%,transparent)}
-.timeline{position:relative;margin-left:.4rem;z-index:1}
-.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;
-  background:linear-gradient(to bottom,var(--amber),rgba(240,149,90,.12));}
-.entry{position:relative;padding:0 0 4rem 2.8rem;transition:transform .7s var(--ease)}
-.entry:hover{transform:translateX(6px)}
-.entry:last-of-type{padding-bottom:0}
-.entry::before{content:'';position:absolute;left:-4.5px;top:8px;width:10px;height:10px;border-radius:50%;
-  background:var(--ink-0);border:1.5px solid var(--amber);box-shadow:0 0 14px rgba(240,149,90,.5);transition:box-shadow .7s var(--ease)}
-.entry:hover::before{box-shadow:0 0 26px rgba(240,149,90,.95)}
-.entry .when{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
-.entry h3{margin:.5rem 0 .2rem;font-size:clamp(1.35rem,2.6vw,1.9rem);font-weight:600}
-.entry .role{color:var(--text-mid);font-size:.95rem;margin-bottom:1rem}
-.entry ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;max-width:640px}
-.entry li{color:var(--text-mid);font-size:.94rem;padding-left:1.1rem;position:relative}
-.entry li::before{content:'—';position:absolute;left:0;color:var(--amber-deep)}
+.j-track{position:relative;display:flex;flex-direction:column;align-items:center;gap:4rem;padding:2.5rem 0 1rem;z-index:1}
+#jLineSvg{position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;width:8px;z-index:0}
+#jLineBg{stroke:rgba(240,222,200,.1);stroke-width:2;fill:none}
+#jLine{stroke:url(#jGrad);stroke-width:2.5;stroke-linecap:round;fill:none;
+  filter:drop-shadow(0 0 6px rgba(240,149,90,.6))}
+.tag-card{position:relative;width:min(24rem,88vw);border-radius:var(--r-lg);padding:.45rem;z-index:2;
+  background:rgba(240,222,200,.025);border:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:stretch;
+  transition:transform .8s var(--ease),border-color .8s var(--ease),box-shadow .8s var(--ease);}
+.tag-card:hover{transform:translateY(-4px)}
+.tag-card.lit{border-color:rgba(240,149,90,.42);box-shadow:0 24px 70px -24px rgba(240,149,90,.4)}
+.punch{position:absolute;top:.95rem;left:50%;transform:translateX(-50%);z-index:3;
+  width:1.15rem;height:1.15rem;border-radius:50%;background:var(--ink-0);
+  border:1px solid var(--line-strong);box-shadow:inset 0 2px 5px rgba(0,0,0,.85), 0 0 0 3px rgba(240,222,200,.03);
+  display:flex;align-items:center;justify-content:center;transition:border-color .8s var(--ease)}
+.punch i{width:.3rem;height:.3rem;border-radius:50%;background:var(--amber);opacity:0;box-shadow:0 0 8px var(--amber);transition:opacity .8s var(--ease)}
+.tag-card.lit .punch{border-color:rgba(240,149,90,.5)}
+.tag-card.lit .punch i{opacity:1}
+.tag-inner{border-radius:calc(var(--r-lg) - .45rem);background:var(--ink-1);padding:2.4rem 1.7rem 1.7rem;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.05);transition:background .8s var(--ease)}
+.tag-card.lit .tag-inner{background:linear-gradient(155deg,rgba(240,149,90,.1),var(--ink-1) 55%)}
+.tag-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.7rem}
+.tag-num{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;color:var(--amber)}
+.tag-when{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--text-low);
+  border:1px solid var(--line);border-radius:999px;padding:.28rem .7rem;white-space:nowrap}
+.tag-card.lit .tag-when{color:var(--text-mid);border-color:var(--line-strong)}
+.tag-inner h3{font-size:1.4rem;font-weight:600;margin-bottom:.15rem}
+.tag-role{color:var(--text-mid);font-size:.85rem;margin-bottom:.85rem}
+.tag-inner p{color:var(--text-mid);font-size:.88rem;line-height:1.6}
+.j-cap{position:relative;z-index:2;display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-0);background:linear-gradient(100deg,var(--amber),#f6d9b8);
+  border-radius:999px;padding:.7rem 1.5rem;font-weight:700;
+  box-shadow:0 10px 40px rgba(240,149,90,.35);transition:transform .6s var(--ease)}
+.j-cap:hover{transform:translateY(-3px)}
+@media (min-width:960px){
+  .j-track{gap:4.5rem}
+  .tag-card{align-self:flex-start;margin-left:4%}
+  .tag-card:nth-of-type(even){align-self:flex-end;margin-left:0;margin-right:4%}
+}
 .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.1rem}
 .chip{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.06em;color:var(--text-mid);
   border:1px solid var(--line);border-radius:999px;padding:.3rem .75rem;background:rgba(240,222,200,.03);}
@@ -491,70 +516,70 @@ footer{border-top:1px solid var(--line);padding:2rem 1.5rem;display:flex;justify
   <div class="wrap">
     <span class="ghost" aria-hidden="true">02</span>
     <div class="sec-head reveal"><span class="sec-tag">02 · Work</span><h2 class="sec-title">A commit log of the last decade.</h2></div>
-    <div class="timeline">
+    <div class="j-track" id="jTrack">
+      <svg id="jLineSvg" preserveAspectRatio="none" viewBox="0 0 8 100" aria-hidden="true">
+        <defs><linearGradient id="jGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f0955a"/><stop offset=".55" stop-color="#f6d9b8"/><stop offset="1" stop-color="#8fb8dd"/>
+        </linearGradient></defs>
+        <path id="jLineBg" d="M4 0 V100"/>
+        <path id="jLine" d="M4 0 V100" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+      </svg>
 
-      <article class="entry reveal">
-        <span class="when">Aug 2023 — Present</span>
-        <h3>Verizon</h3>
-        <p class="role">Sr. Lead Full Stack Java Developer · MSF2NSA Migration · Irving, TX</p>
-        <ul>
-          <li>Leading a cross-functional team of backend, frontend and QA engineers delivering North Star Architecture across Verizon's SOE, CXP and MVO channels.</li>
-          <li>Migrating a monolithic React frontend to micro-frontends while modernizing services to Java 21 + Spring Boot with reactive REST (Mono / flatMap).</li>
-          <li>High-volume file ingestion via multithreaded Spring Batch; Python FastAPI services for data workflows.</li>
-          <li>Mentoring engineers through pair programming, architecture walkthroughs and code-review standards.</li>
-        </ul>
-        <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot</span><span class="chip">React micro-frontends</span><span class="chip">Reactive REST</span><span class="chip">Spring Batch</span><span class="chip">Python · FastAPI</span></div>
+      <article class="tag-card reveal">
+        <div class="punch" aria-hidden="true"><i></i></div>
+        <div class="tag-inner">
+          <div class="tag-top"><span class="tag-num">E·01</span><span class="tag-when">Aug 2023 — Present</span></div>
+          <h3>Verizon</h3><p class="tag-role">Sr. Lead Full Stack Java Developer · Irving, TX</p>
+          <p>Leading North Star Architecture delivery across SOE, CXP and MVO — React micro-frontends over reactive Java 21 + Spring Boot services, high-volume Spring Batch ingestion, and mentoring across the squad.</p>
+          <div class="chips"><span class="chip">Java 21</span><span class="chip">React MFE</span><span class="chip">Spring Batch</span></div>
+        </div>
       </article>
 
-      <article class="entry reveal">
-        <span class="when">Aug 2022 — Aug 2023</span>
-        <h3>JPMorgan Chase</h3>
-        <p class="role">Full Stack Engineer · E2E Data Platform · Dallas, TX</p>
-        <ul>
-          <li>Designed an advanced microservice architecture handling heavy internal traffic for shared platform data.</li>
-          <li>Eureka service registry + Zuul API gateway routing; voltage-encrypted REST transfer with CORS/XSS/CSRF hardening.</li>
-          <li>Dockerized services, Swagger2 documentation, Jenkins CI/CD, deployed on AWS.</li>
-        </ul>
-        <div class="chips"><span class="chip">Java 8</span><span class="chip">Microservices</span><span class="chip">Eureka · Zuul</span><span class="chip">Docker</span><span class="chip">AWS</span><span class="chip">Splunk</span></div>
+      <article class="tag-card reveal">
+        <div class="punch" aria-hidden="true"><i></i></div>
+        <div class="tag-inner">
+          <div class="tag-top"><span class="tag-num">E·02</span><span class="tag-when">Aug 2022 — Aug 2023</span></div>
+          <h3>JPMorgan Chase</h3><p class="tag-role">Full Stack Engineer · Dallas, TX</p>
+          <p>Microservice architecture for the shared E2E data platform — Eureka + Zuul routing, voltage-encrypted REST with CORS/XSS/CSRF hardening, Dockerized services shipped through Jenkins to AWS.</p>
+          <div class="chips"><span class="chip">Microservices</span><span class="chip">Eureka · Zuul</span><span class="chip">AWS</span></div>
+        </div>
       </article>
 
-      <article class="entry reveal">
-        <span class="when">Mar 2022 — Aug 2022</span>
-        <h3>Capital One</h3>
-        <p class="role">Full Stack Java Developer · Chariot / Content-as-a-Service · Remote</p>
-        <ul>
-          <li>Drove the CaaS1 → CaaS2 domain migration on the Nuxeo platform, documenting the target architecture.</li>
-          <li>Built Java 8 schema validation and guided other domain teams through the migration changes.</li>
-        </ul>
-        <div class="chips"><span class="chip">Java 8</span><span class="chip">Spring Boot</span><span class="chip">Nuxeo</span><span class="chip">Angular 7</span><span class="chip">Docker</span></div>
+      <article class="tag-card reveal">
+        <div class="punch" aria-hidden="true"><i></i></div>
+        <div class="tag-inner">
+          <div class="tag-top"><span class="tag-num">E·03</span><span class="tag-when">Mar 2022 — Aug 2022</span></div>
+          <h3>Capital One</h3><p class="tag-role">Full Stack Java Developer · Remote</p>
+          <p>Drove the CaaS1 → CaaS2 content-platform migration on Nuxeo — target-architecture documentation, Java 8 schema validation, and guiding domain teams through the change.</p>
+          <div class="chips"><span class="chip">Nuxeo</span><span class="chip">Java 8</span><span class="chip">Docker</span></div>
+        </div>
       </article>
 
-      <article class="entry reveal">
-        <span class="when">Jul 2019 — Feb 2022</span>
-        <h3>TGen <span style="font-weight:400;color:var(--text-low);font-size:.8em">via Girikon</span></h3>
-        <p class="role">Full Stack Java Developer · Physician Portal · Phoenix, AZ</p>
-        <ul>
-          <li>Built the portal doctors, patients and hospitals use to search lab reports and manage PHI — with role-based auth end to end.</li>
-          <li>Decomposed the monolith into Dockerized microservices behind Zuul with Ribbon load balancing.</li>
-          <li>Event-driven AWS: Lambda triggers from API Gateway, S3 and DynamoDB; CloudWatch metrics, alarms and Route 53 failover.</li>
-        </ul>
-        <div class="chips"><span class="chip">Healthcare · PHI</span><span class="chip">RBAC</span><span class="chip">AWS Lambda · S3</span><span class="chip">Angular 7</span><span class="chip">Python</span><span class="chip">Kubernetes</span></div>
+      <article class="tag-card reveal">
+        <div class="punch" aria-hidden="true"><i></i></div>
+        <div class="tag-inner">
+          <div class="tag-top"><span class="tag-num">E·04</span><span class="tag-when">Jul 2019 — Feb 2022</span></div>
+          <h3>TGen <span style="font-weight:400;color:var(--text-low);font-size:.75em">via Girikon</span></h3><p class="tag-role">Full Stack Java Developer · Phoenix, AZ</p>
+          <p>Built the physician portal for PHI-grade lab data with end-to-end RBAC — a monolith decomposed into Dockerized microservices with event-driven AWS Lambda, S3, CloudWatch and Route 53 failover.</p>
+          <div class="chips"><span class="chip">Healthcare · PHI</span><span class="chip">AWS Lambda</span><span class="chip">Kubernetes</span></div>
+        </div>
       </article>
 
-      <article class="entry reveal">
-        <span class="when">Sep 2018 — Jul 2019</span>
-        <h3>American Express <span style="font-weight:400;color:var(--text-low);font-size:.8em">via Vedhi</span></h3>
-        <p class="role">Full Stack Java Developer · Risk Data Engine — Offers API</p>
-        <ul>
-          <li>Improved SLAs of the high-traffic Offers API by migrating to an Apache Camel + Spring Boot architecture.</li>
-          <li>Built the drag-and-drop Journey UI in Angular 6; APIGEE-standard secured endpoints; HBase and Hive persistence.</li>
-        </ul>
-        <div class="chips"><span class="chip">Apache Camel</span><span class="chip">HBase · Hive</span><span class="chip">Angular 6</span><span class="chip">APIGEE</span></div>
+      <article class="tag-card reveal">
+        <div class="punch" aria-hidden="true"><i></i></div>
+        <div class="tag-inner">
+          <div class="tag-top"><span class="tag-num">E·05</span><span class="tag-when">Sep 2018 — Jul 2019</span></div>
+          <h3>American Express <span style="font-weight:400;color:var(--text-low);font-size:.75em">via Vedhi</span></h3><p class="tag-role">Full Stack Java Developer</p>
+          <p>Raised SLAs on the high-traffic Offers API with an Apache Camel + Spring Boot re-architecture — Angular 6 Journey UI, APIGEE-secured endpoints, HBase + Hive persistence.</p>
+          <div class="chips"><span class="chip">Apache Camel</span><span class="chip">HBase · Hive</span><span class="chip">APIGEE</span></div>
+        </div>
       </article>
 
-      <div class="earlier reveal">
-        <b>Earlier:</b> Verizon — Global Contracting Tool &amp; Sales2Go (Angular 2, Spring Batch) · BNSF Railway — OTMM SOAP API (Axis2, RSA SecurID) · Cadsys, India — full-stack resource-management platform · Research assistant &amp; web developer, University of North Texas. <br><br><b>Education:</b> M.S. Information Science, University of North Texas · B.Tech, Electronics &amp; Communication Engineering · Sun Certified Java Programmer.
-      </div>
+      <a class="j-cap reveal" href="#contact">Ready for the next chapter →</a>
+    </div>
+
+    <div class="earlier reveal">
+      <b>Earlier:</b> Verizon — Global Contracting Tool &amp; Sales2Go (Angular 2, Spring Batch) · BNSF Railway — OTMM SOAP API (Axis2, RSA SecurID) · Cadsys, India — full-stack resource-management platform · Research assistant &amp; web developer, University of North Texas. <br><br><b>Education:</b> M.S. Information Science, University of North Texas · B.Tech, Electronics &amp; Communication Engineering · Sun Certified Java Programmer.
     </div>
   </div>
 </section>
@@ -868,6 +893,30 @@ if(reduceMotion){ document.querySelectorAll('.hero-name .word').forEach(w=>w.sty
       card.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)';
     });
   });
+})();
+
+/* ── Experience journey: line draws with scroll, cards light up ── */
+(function initJourney(){
+  const track = document.getElementById('jTrack');
+  const line = document.getElementById('jLine');
+  if(!track || !line) return;
+  const cards = Array.from(track.querySelectorAll('.tag-card'));
+  if(reduceMotion){ line.style.strokeDashoffset = 0; cards.forEach(c=>c.classList.add('lit')); return; }
+  let ticking = false;
+  function update(){
+    ticking = false;
+    const r = track.getBoundingClientRect();
+    const trigger = window.innerHeight * 0.72;
+    const progress = Math.min(Math.max((trigger - r.top) / r.height, 0), 1);
+    line.style.strokeDashoffset = (1 - progress).toFixed(4);
+    cards.forEach(card=>{
+      const cr = card.getBoundingClientRect();
+      card.classList.toggle('lit', cr.top + cr.height * 0.45 < trigger);
+    });
+  }
+  window.addEventListener('scroll', ()=>{ if(!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
+  window.addEventListener('resize', update);
+  update();
 })();
 
 /* ── Scroll reveals ────────────────────────────────────── */
